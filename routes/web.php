@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+//Route::get('/', function () {
     return view('welcome');
-});
+//});
+//
+Route::resource('servicios', App\Http\Controllers\ServicioController::class);
+
+Route::resource('citas', App\Http\Controllers\CitaController::class);
+
