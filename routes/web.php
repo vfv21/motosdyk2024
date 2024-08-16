@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 //});
 //
+
+Route::view('/', 'welcome');
+
 Route::resource('servicios', App\Http\Controllers\ServicioController::class);
 
 Route::resource('citas', App\Http\Controllers\CitaController::class);

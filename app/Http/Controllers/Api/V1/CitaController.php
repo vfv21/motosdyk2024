@@ -13,7 +13,7 @@ class CitaController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(cita::all(), 200);//Mostrar todas las citas
     }
 
     /**
@@ -21,7 +21,21 @@ class CitaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validar datos
+        $datos = $request->validate([
+            'fecha'=> ['requered', 'string'],
+            'datos_moto'=>['nullable', 'string'],
+
+        ]);
+
+        //guardar datos
+        $cita = Cita::create($datos);
+
+        //Respuesta al cliente
+       return response()->json([
+        'success'=> true,
+        'message'=> 'Cita creada exitosamente',
+       ],201);
     }
 
     /**
@@ -29,7 +43,7 @@ class CitaController extends Controller
      */
     public function show(Cita $cita)
     {
-        //
+        return response()->json($cita, 200); //Mostrar cita
     }
 
     /**
@@ -37,7 +51,21 @@ class CitaController extends Controller
      */
     public function update(Request $request, Cita $cita)
     {
-        //
+         //Validar datos
+         $datos = $request->validate([
+            'fecha'=> ['requered', 'string'],
+            'datos_moto'=>['nullable', 'string'],
+
+        ]);
+
+        //actualizar datos
+        $cita->update($datos);
+
+        //Respuesta al cliente
+       return response()->json([
+        'success'=> true,
+        'message'=> 'Cita actualizada exitosamente',
+       ],200);
     }
 
     /**
@@ -45,6 +73,10 @@ class CitaController extends Controller
      */
     public function destroy(Cita $cita)
     {
-        //
+        $cita->delete();
+        return response()->json([
+            'success'=> true,
+            'message'=> 'Cita eliminada exitosamente',
+           ],204);
     }
 }
