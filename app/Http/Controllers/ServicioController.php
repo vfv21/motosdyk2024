@@ -13,7 +13,7 @@ class ServicioController extends Controller
     public function index()
     {
         $servicios = Servicio::all();
-        return view('welcome', compact('servicios'));
+        return view('servicios.index', compact('servicios'));
     }
 
     /**
@@ -21,7 +21,7 @@ class ServicioController extends Controller
      */
     public function create()
     {
-        //
+        return view('servicios.create'); 
     }
 
     /**
@@ -29,7 +29,8 @@ class ServicioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Servicio::create($request->all());
+        return to_route('servicios.index')->with('info', 'Servicio creado con éxito');
     }
 
     /**
@@ -45,7 +46,7 @@ class ServicioController extends Controller
      */
     public function edit(Servicio $servicio)
     {
-        //
+        return view('servicios.edit', ['servicio' => $servicio]);
     }
 
     /**
@@ -53,7 +54,8 @@ class ServicioController extends Controller
      */
     public function update(Request $request, Servicio $servicio)
     {
-        //
+        $servicio->update($request->all());
+        return to_route('servicios.index')->with('info', 'Servicio actualizado con éxito');
     }
 
     /**
@@ -61,6 +63,7 @@ class ServicioController extends Controller
      */
     public function destroy(Servicio $servicio)
     {
-        //
+        $servicio->delete();
+        return to_route('servicios.index')->with('info', 'Servicio eliminado con éxito');
     }
 }

@@ -17,7 +17,8 @@ class ServicioFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nombre' => fake()->word(),
+            'descripcion' => fake()->text()
         ];
     }
 }
